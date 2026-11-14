@@ -1,0 +1,11 @@
+import { cp, mkdir, rm } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+const root=dirname(fileURLToPath(import.meta.url));
+await rm(resolve(root,'dist'),{recursive:true,force:true});
+await mkdir(resolve(root,'dist'),{recursive:true});
+await cp(resolve(root,"src/index.html"),resolve(root,'dist',"index.html"),{recursive:true});
+await cp(resolve(root,"src/styles.css"),resolve(root,'dist',"styles.css"),{recursive:true});
+await cp(resolve(root,"src/entry.js"),resolve(root,'dist',"entry.js"),{recursive:true});
+await cp(resolve(root,"src/art"),resolve(root,'dist',"art"),{recursive:true});
+console.log('Build concluído: dist/');
